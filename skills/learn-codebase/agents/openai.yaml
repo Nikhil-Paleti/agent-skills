@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learn a Codebase"
+  short_description: "Understand real code through maps and execution paths"
+  default_prompt: "Use $learn-codebase to help me understand this repository through a small map and a step-by-step trace of one real behavior."

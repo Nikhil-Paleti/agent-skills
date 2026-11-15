@@ -1,0 +1,4 @@
+interface:
+  display_name: "Do a Project Task"
+  short_description: "Clarify, implement, and verify a bounded change"
+  default_prompt: "Use $do-project-task to resolve material ambiguity, complete the requested project change, and verify its behavior."

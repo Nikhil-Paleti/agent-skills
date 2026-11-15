@@ -1,0 +1,4 @@
+interface:
+  display_name: "Learn a Concept"
+  short_description: "Understand technical ideas through small examples"
+  default_prompt: "Use $learn-concept to help me understand a technical concept through one concrete example at a time."

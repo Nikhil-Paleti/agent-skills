@@ -1,0 +1,4 @@
+interface:
+  display_name: "Start a Project"
+  short_description: "Shape a rough idea into a useful first milestone"
+  default_prompt: "Use $start-project to clarify my idea, choose a small verifiable first milestone, and help me get started."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Practice a Concept"
+  short_description: "Build independent ability with hints and feedback"
+  default_prompt: "Use $practice-concept to help me apply a technical concept myself through a small challenge, hints, and feedback."
