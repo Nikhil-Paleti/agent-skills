@@ -1,124 +1,129 @@
 ---
 name: do-project-task
-description: Complete a bounded change in an existing software or technical project by clarifying material ambiguity, inspecting relevant context, implementing, and verifying the outcome. Use for requested fixes, features, refactors, and scoped performance work. Prefer start-project when the goal or project direction still needs discovery; respect planning-only, review-only, and learner-led intent.
+description: Complete a bounded change in an existing software or technical project, from relevant inspection through implementation and evidence of the expected result. Use for delegated fixes, features, refactors, and scoped performance work. Route project discovery to start-project and source explanations to learn-codebase when available; honor plan-only, review-only, and learner-led requests.
 ---
 
 # Do a Project Task
 
-Turn the request into a checkable outcome, resolve material uncertainty, and
-complete the authorized work. Keep the change coherent, grounded, and reviewable.
+Deliver the requested behavior and evidence that it works. Investigate enough to
+act; keep user-facing updates short and focused on the next useful action.
 
-## Establish the task and actual workspace
+## Find the task boundary
 
-Confirm access to the intended repository or supplied files. Use the current
-conversation and existing project evidence; do not imply another machine, path,
-or chat is accessible without checking. If blocked, name the missing access and
-continue only independent work that helps.
+Infer the user's purpose, requested mode, and constraints from the conversation
+and accessible project evidence. A clear request to fix or implement authorizes
+routine work within that scope; it does not need an interview or a new approval
+at each step. Honor explicit discussion or guided checkpoints.
 
-Read applicable repository instructions, including relevant nested guidance.
-Inspect the working state and preserve pre-existing user changes. Identify the
-relevant entry point, configuration, implementation, and nearby checks; do not
-map or read the entire repository before a small edit.
+Check access to the intended workspace. Read applicable repository instructions,
+including nested guidance. Inspect the working state before editing and preserve
+user changes, including changes near the target code. Do not assume another
+machine, path, or chat is accessible. If access is missing, name the minimum
+missing source or access and continue useful independent work.
 
-Distinguish executing a change from explaining code, reviewing, planning, or
-learning implementation. Honor the requested mode. Use learn-codebase for a
-source walkthrough or practice-concept for learner-led implementation when useful,
-without repeatedly asking the user to select a skill.
+Keep explanation, review, planning, and learner-led work in their requested mode.
+For a source question, answer it without silently fixing the code. Use
+learn-codebase, practice-concept, or start-project when available and appropriate;
+carry forward known context without asking the user to choose a skill.
 
-## Clarify behavior and completion
+## Establish a checkable result
 
-Determine the current and desired behavior, important compatibility constraints,
-and evidence that would show the task is complete. Prefer concrete inputs and
-outputs, reproduction steps, or an example over vague quality language.
+Identify the current behavior, desired behavior, constraints to preserve, and
+an observable check. Use the report, source, tests, and relevant docs first.
+Do not ask the user to supply facts the project can establish.
 
-Ask one focused question when reasonable interpretations lead to materially
-different behavior or scope. Inspect source/tests/docs first when they can answer
-it. Request the next blocking input rather than a bundle of potentially useful
-details. State sensible assumptions for routine reversible details and continue.
-Do not ask questions merely because the prompt is short.
+Ask one focused question only when plausible answers materially change behavior,
+compatibility, scope, or verification. Explain the choice that depends on it.
+State sensible assumptions and proceed for routine reversible details. A short
+prompt is not itself ambiguous. If one decision blocks part of the work, continue
+independent authorized work while awaiting it.
 
-For vague performance work, establish the workload, metric, and relevant limit
-before a broad rewrite. For a defect, reproduce or inspect the failing path
-before patching when feasible. For a refactor, identify behavior to preserve.
+For a defect, reproduce the reported path when feasible, or explain what source
+establishes and what remains unobserved. For a refactor, identify behavior that
+must stay the same. For performance work, establish a representative workload,
+metric, and relevant limit before a broad rewrite.
 
-Keep known user decisions and constraints. A later correction updates the task;
-incorporate it without restarting the whole process.
+Choose checks against the requested behavior, not against the proposed code.
+A passing existing suite may omit the reported case. For example, a checkpoint
+file existing does not establish that resuming it preserves the run's result.
 
-## Choose a proportional approach
+## Inspect, then make the coherent change
 
-For an obvious local fix, proceed directly. For a multi-part or consequential
-change, describe a short plan grounded in actual code and checkable outcomes.
-Investigate only uncertainties that could alter that approach.
+Start at the relevant entry point and follow the implementation, affected
+callers, configuration, and nearby tests far enough to understand the contract.
+Check both sides of a boundary when the behavior crosses one. Do not map the
+whole repository for a local fix. Use primary documentation for uncertain or
+versioned APIs when that could change the approach.
 
-Separate necessary work from optional cleanup. Match surrounding architecture,
-naming, comment density, and error-handling conventions. Prefer the smallest
-coherent change that satisfies the request, not the smallest diff at the expense
-of correctness. Avoid speculative abstractions, unrelated rewrites, new features,
-and imagined edge-case handling.
+Proceed directly for an obvious local change. For multi-part work, give a brief
+plan tied to observable results. Separate necessary work from optional cleanup.
+Match nearby architecture, naming, error handling, and comment density. Prefer
+the smallest coherent change that meets the contract; a one-line symptom patch
+can still be incomplete.
 
-If a missing decision blocks part of the task, ask specifically and continue
-independent authorized work. When explicitly asked for a plan or review only,
-produce that result without implementation.
+Implement required behavior across affected interfaces and docs as needed.
+Preserve compatibility unless the requested change requires otherwise. Do not add
+speculative abstractions, new features, unrelated rewrites, or imagined scale.
+Necessary code health and meaningful regression coverage remain in scope.
 
-## Implement and stay within authorization
+Recheck the working state if it changes during the task. If a user edit conflicts
+with the necessary change and ownership or intent cannot be resolved, ask about
+that conflict. Do not revert, overwrite, or include unrelated user changes.
 
-Complete the requested behavior across the relevant callers, configuration, and
-documentation when needed. Use primary documentation for uncertain/versioned APIs.
-Do not fix only a symptom when the actual cause is established, or optimize solely
-for the visible test while breaking the contract.
+Use the user's request, standing authorization, and host policy for commits,
+pushes, PRs, deployment, and other external actions. Local implementation does
+not by itself authorize publication. Do not add a second confirmation for an
+action already authorized.
 
-Work through the bounded task without approval after every routine step. Honor
-explicit guided checkpoints and the host's permissions. Do not invent a blanket
-approval gate for reversible implementation or checks already in scope.
+## Verify the result at the right surface
 
-Preserve unrelated changes, data, and public interfaces the task does not require
-changing. If an unexpected user edit materially conflicts with the work, clarify
-ownership rather than reverting it. Do not include unrelated hunks in a commit.
+Use the project's actual commands and required checks. Choose the smallest
+meaningful verification that covers the changed behavior and affected contract.
 
-Treat committing, pushing, PR creation, deployment, and external mutations
-according to the user's request, standing authorization, and host policy.
-Do not assume local implementation automatically authorizes publication.
-Do not impose a second confirmation where the action is already authorized.
+- For a bug or behavior change, add or update a regression test when it protects
+  useful behavior and fits the project. When feasible, confirm that it fails on
+  the original behavior for the intended reason, then passes with the change.
+- Exercise the actual caller or user path when unit tests would miss a handoff:
+  a CLI invocation, save/load round trip, relevant integration, or UI interaction.
+  Check a nearby behavior or compatibility case when the change can affect it.
+- For performance work, compare the same workload and conditions, and pair
+  measurements with correctness checks.
+- For trivial prose or formatting edits, use direct inspection or relevant
+  tooling. Do not manufacture tests that mirror the implementation.
 
-## Verify observable behavior
-
-Use the project's actual commands and suitable verification surfaces. Check a
-baseline or reproduce the failure when that separates existing problems from
-regressions. Choose the smallest meaningful check, plus required repository checks.
-
-For behavior changes or defects, add/update a regression test when it protects
-meaningful behavior and fits the project. Do not mechanically create tests for
-trivial prose/formatting changes, implementation details, impossible inputs, or
-reversible low-impact edits.
-
-Exercise the changed behavior directly where unit tests alone would miss it:
-a CLI invocation, numerical comparison, relevant integration, or UI interaction.
-For performance work, pair measurements with correctness checks and report the
-conditions. Mocked success does not establish a real external integration.
+A test asserts only its setup. A mock does not establish a real integration, and
+static reasoning does not establish execution. Do not weaken assertions or
+redefine success to obtain a green result.
 
 Fix failures introduced by the change and rerun affected checks. Broaden testing
-when shared behavior, failures, or unresolved concerns justify it. Once sufficient
-checks pass, stop repeating them without new evidence. Do not weaken tests,
-remove assertions, or redefine success just to obtain a green result.
+when shared behavior, failures, or unresolved concerns justify it. Stop repeating
+checks once the evidence is sufficient. Keep temporary probes and generated
+artifacts out of the project unless they belong in the deliverable.
 
-Separate passed, failed, and unrun checks. If a tool, dependency, or environment
-blocks verification, state the limit and use a justified alternative when
-available. Do not claim execution or performance improvements not observed.
+If verification is blocked, state the exact limit and use a justified alternative
+when available. A missing tool does not justify an unrelated environment rebuild.
+Separate passed, failed, and unrun checks; keep claims within observed evidence.
 
-## Review, finish, and report
+## Finish with a useful handoff
 
-Inspect the final diff against the request and existing user changes. Check
-relevant interfaces, configuration, artifacts, and accidental unrelated edits.
-Review for concrete correctness problems rather than inventing a new style
-cleanup project.
+Review the final diff against the request, applicable guidance, and user changes.
+Check relevant interfaces and accidental unrelated edits. Finish the requested
+scope when the behavior and required checks are satisfied. Report a partial
+result when a genuine blocker prevents completion; optional future work does
+not extend the task.
 
-Continue until the requested outcome and appropriate verification are complete,
-or a genuine blocker prevents further defensible progress. A first patch or one
-passing test is not an automatic stopping point; neither is finding optional
-future work a reason to continue indefinitely.
+Lead with the resulting behavior. Briefly name relevant files, checks and their
+outcomes, and material limitations. Include one useful next action only when it
+helps, such as the exact blocked check or an authorized final step. Avoid a
+file-by-file diary, routine permission questions, or a tutorial by default.
 
-Report the resulting behavior, relevant files, verification evidence, and material
-remaining limitations concisely. Be explicit when the result is partial. If an
-external final step requires a user action, leave the concrete result reviewable
-and identify that exact step. Do not claim whole-project readiness from a bounded
-change or promise completion in another session.
+When explanation helps the user assess the change, aim approximately 80% toward
+ASD-STE100 (Simplified Technical English) as a flexible target, without claiming
+formal compliance: name the actor, use short direct sentences, keep terms
+consistent, state conditions, and define unfamiliar technical terms when needed.
+
+Create a small diagram, local HTML explanation, or other artifact proactively
+when it answers a real question about the change. Use readable labels,
+keyboard-operable interactive controls, and essential information in text.
+Keep it tied to inspected source and distinguish illustration from execution.
+An explanatory artifact does not authorize publication or unrelated project edits.
