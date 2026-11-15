@@ -60,8 +60,8 @@ Choose a small path from meaningful input to observable output. Empty scaffoldin
 or a set of interfaces is not a working first result.
 
 If feasibility is the central unknown, test that assumption first. State the
-question, a bounded experiment, and what result would support continuing or
-changing direction. A passing technical check can show feasibility; it cannot
+question, a bounded experiment, and what result would support continuing, changing
+direction, or stopping. A passing technical check can show feasibility; it cannot
 establish that users need the product.
 
 For example, a GPU benchmark comparison tool might first read two existing result
@@ -84,7 +84,9 @@ deliverable. Continue through further milestones when the user requested them.
 ## Take the next useful step
 
 For planning, deliver the plan at the requested depth and stop. For co-building,
-give one useful step and leave room for the user's attempt at the agreed boundary.
+give one meaningful task and leave room for the user's attempt at the agreed
+boundary. Bundle trivial setup with that task instead of requiring a separate
+confirmation for each setup action.
 For delegated work, carry the goal, constraints, decisions, and checks into
 implementation without a fresh interview or routine approval gate. Use
 do-project-task when available; otherwise implement and verify directly.
