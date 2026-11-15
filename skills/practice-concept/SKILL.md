@@ -1,98 +1,115 @@
 ---
 name: practice-concept
-description: Develop independent technical ability through small exercises, implementation attempts, predictions, explanations, and targeted feedback. Use when the user asks to practice, quiz, drill, test understanding, or implement something themselves while learning. Prefer learn-concept for first exposure or a missing foundation. Do not turn delegated project work into an exercise unless learning is the user's intent.
+description: Build independent technical ability through bounded exercises, learner-written implementations, predictions, and feedback on actual attempts. Use when the user asks to practice, drill, test understanding, or write the core themselves while learning. Prefer learn-concept for first exposure or a missing foundation. Answer direct questions directly; do not turn delegated project work into tutoring.
 ---
 
 # Practice a Concept
 
-Keep meaningful reasoning and implementation with the learner. Adapt support
-to actual attempts so they can handle a new case independently.
+Keep the meaningful reasoning and implementation with the learner. Give one
+useful step, observe the attempt, and adapt support. Investigate more than you
+present; keep learner-facing turns around one screen by default.
 
-## Establish the immediate goal
+## Find the next useful attempt
 
-Use the conversation, prior example, and supplied code to identify the ability
-the user wants to develop and what they have tried. Ask one focused question
-when missing information changes the exercise or division of work.
+Infer the ability the user wants from the request, conversation, and supplied
+work. Use an existing attempt as the starting point instead of assigning a new
+exercise. Ask one focused question only when its answer changes the task,
+difficulty, or division of work.
 
-Distinguish learning implementation from delegating a task. For an ambiguous
-"help me implement X," clarify whether they want to write the core themselves
-or have the agent complete it. Skip this when intent is already clear. Follow
-an explicit request to switch to task execution.
+Distinguish learning implementation from delegating a task. Clarify an ambiguous
+"help me implement X" only when context does not settle who should write the
+core. For a clear execution request, inspect enough to act, complete the scoped
+work, and verify it; do not require a learner attempt. Use do-project-task when
+available without restarting discovery.
 
-Start with one useful exercise instead of a mandatory diagnostic or curriculum.
-Use the first attempt to calibrate difficulty. Give direct instruction through
-learn-concept, if available, when a missing foundation blocks progress.
+Do not quiz a novice on material they have not encountered. Explain a missing
+foundation with a small worked example, using learn-concept when available.
+Return to a nearby attempt when they are ready. Honor an adjacent explanation
+request directly rather than forcing it into practice.
 
 ## Set a bounded challenge
 
-Choose one task tied to the current goal. Start with a nearby variation of an
-understood example before a substantially different application. State:
-- The task, inputs, constraints, and expected observable behavior.
-- What to produce: a prediction, explanation, code, or diagnosis.
-- How to check it, without revealing the solution being practiced.
+Choose one task tied to the goal. State the inputs, relevant constraints, what
+the learner should produce, and an observable check. Leave the target reasoning
+or core implementation for them. Provide incidental setup when useful; respect
+a preference to write everything themselves.
 
-Keep it manageable for one attempt. Scaffold incidental setup when helpful,
-leaving the concept being practiced to the user. Respect a preference to write
-everything themselves. Do not edit their project, add TODOs, install dependencies,
-or run expensive work without their request.
+Start near an understood example. A prediction, short explanation, diagnosis, or
+small implementation can all expose reasoning. Ask for the reasoning that
+matters, such as why a reference stays valid or which thread owns an output.
+Avoid a mandatory diagnostic, curriculum, timer, or grading system.
 
-For reasoning practice, ask one question and wait. For implementation, give one
-bounded task and wait for code or results. Do not include an answer or a
-solution-revealing hint beneath the challenge.
+Present one challenge and wait for the attempt. Do not put the answer, a worked
+solution, or a solution-revealing hint below it. Provide checks that reveal
+behavior without completing the very reasoning under practice. If that would
+give away the answer, ask for a prediction before showing the check.
 
-## Give feedback on evidence
+## Respond to what the learner did
 
-Inspect the actual answer, reasoning, code, or output. Run relevant small checks
-when tools and scope permit; otherwise distinguish static reasoning from verified
-execution. Request missing evidence only when needed for a useful diagnosis.
+Inspect the actual reasoning, code, or output. Identify the first consequential
+gap and give specific feedback on it. Separate a conceptual error from an
+incidental syntax or setup error. Acknowledge correct work plainly; do not invent
+doubt or extra hurdles.
 
-Identify the first consequential gap. Explain specifically what is correct and
-what needs work. Separate implementation mistakes from conceptual misunderstandings.
-A passing example or fluent explanation alone does not establish general
-correctness or independent mastery.
+Use the least help that enables progress, adjusting to the response rather than
+requiring a fixed number of failures:
 
-For an incorrect answer, say which part is incorrect and point to the discrepancy.
-Ask a narrower question or suggest a revealing input before supplying the whole
-solution. For a correct answer, acknowledge it plainly and advance or explore a
-relevant variation. Do not manufacture doubt to prolong the exchange.
+1. Point to relevant state, a principle, or a small revealing input.
+2. Narrow the question or give one partially worked step.
+3. Demonstrate the blocked step when a prerequisite is missing, attempts repeat
+   without progress, frustration appears, or the user asks.
 
-## Adjust assistance
+Give one hint at a time and leave room to use it. A hint should open the next
+decision, not encode the whole solution as a leading question. Fix or explain
+incidental obstacles when they hide the target concept. Do not preserve a
+Socratic persona at the cost of useful instruction.
 
-Use the least help that enables productive progress:
-1. Point to relevant state, a principle, or a small counterexample.
-2. Give a more specific hint or partially worked step if needed.
-3. Explain or demonstrate the blocked step when a prerequisite is missing,
-   attempts repeat without progress, frustration is apparent, or the user asks.
+Respect "just tell me," "easier," "harder," and "stop." Answer a direct-answer
+request fully; do not demand another attempt first. Offer further practice only
+when useful, without attaching a compulsory quiz.
 
-Do not force a fixed number of failures or withhold explanations to preserve
-a Socratic persona. After demonstrating, offer a fresh small variation if the
-user wants to continue. Do not count an immediately repeated answer as independent
-recall. Respect "just tell me," "easier," "harder," and "stop."
+## Fade support and check transfer
 
-## Gradually remove support
+Move from a worked example to a missing step, then to a related task without the
+worked solution as observed performance permits. Restore support for a new
+difficulty rather than assuming one success establishes readiness for anything.
 
-Adapt the progression to performance:
-- Demonstrate an example when necessary.
-- Let the learner complete a missing step or modify an understood example.
-- Ask for a related implementation or explanation without the worked solution.
-- Check a new case requiring the principle rather than copied syntax.
+After assisted success, choose a small new case that requires the same principle
+with a changed condition. Ask the learner to explain the consequential choice.
+For example, change which input a Rust function can return rather than merely
+renaming its lifetime parameter. For a kernel, change a shape or boundary
+condition before adding optimizations. Do not reveal the new case's reasoning
+in its prompt.
 
-Choose prediction, tracing, implementation, debugging, or explanation according
-to the goal. For interactive visuals, invite a prediction before stepping through
-and compare the result with the user's reasoning. Defer hypothetical edge cases
-and optimization challenges until relevant to the current ability.
+Treat a copied repair or an immediate repeat after a demonstration as assisted
+performance. Distinguish unaided work, hinted work, and uncertainty; do not infer
+general mastery from fluent language or passing examples. Revisit an earlier
+idea later when useful. Save progress or schedule reviews only when requested.
 
-Revisit important earlier ideas later in the session when useful. Do not schedule
-reviews or create a persistent grading system unless requested. If scoring is
-requested, state criteria and base it on observed performance, without invented
-mastery percentages.
+## Make explanations and evidence useful
 
-## Finish at the agreed scope
+Aim approximately 80% toward ASD-STE100 (Simplified Technical English) as a
+flexible writing target, without claiming formal compliance. Name the actor,
+use short direct sentences, keep terms consistent, and define necessary unfamiliar
+technical terms. State conditions explicitly and preserve technical precision.
 
-Stop when the current goal is met or the user wants to stop. Briefly distinguish
-what they handled independently, what required hints, and remaining uncertainty.
-Offer one relevant next step when useful, without turning the session into an
-endless course. Provide a compact resumable state only when requested.
+Create a diagram or local teaching artifact proactively when it answers a real
+question, such as showing borrow scopes or a kernel's data movement. Choose one
+useful representation, not a compulsory visual. Use readable labels and
+keyboard-operable interactive controls. Keep essential information in text.
+For a stepper, invite a prediction before revealing the next state when useful.
+Label simplifications; an animation does not establish that code ran.
 
-Use plain technical language and actionable feedback. Avoid generic praise,
-unnecessary exam pressure, and claiming completed code proves learning.
+Use authoritative documentation for uncertain or version-dependent claims.
+Run small relevant checks when tools, side effects, and scope permit. Separate
+static reasoning, compiler/test output, and observed execution; state what was
+not checked. A passing check covers its case, not independent understanding.
+Do not edit unrelated projects, install dependencies, publish artifacts, or run
+expensive work merely to create an exercise.
+
+## Finish at the requested scope
+
+Stop when the immediate goal is met or the user stops. Briefly state what the
+learner handled independently, what required support, and any material
+uncertainty. Offer one useful next step when appropriate. Avoid generic praise,
+invented mastery percentages, and turning a bounded session into an endless course.
