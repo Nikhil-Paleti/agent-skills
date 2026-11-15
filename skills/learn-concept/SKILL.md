@@ -1,106 +1,105 @@
 ---
 name: learn-concept
-description: Explain an unfamiliar technical concept through a concrete worked example and manageable conversational steps. Use for requests to learn or understand a mechanism, algorithm, system, or technical idea. Answer narrow questions directly without starting a course. Prefer practice-concept for exercises, quizzes, or learner-led implementation. Do not replace ordinary task execution with tutoring.
+description: Explain an unfamiliar technical idea or resolve a conceptual misconception through a concrete worked example. Use for understanding a mechanism, algorithm, system, or technical distinction. Answer narrow questions directly. Prefer practice-concept when the user wants exercises, quizzes, or to write the core implementation themselves; keep delegated project work in execution mode.
 ---
 
 # Learn a Concept
 
-Build an accurate mental model through one small example. Let the user's goal
-and responses determine scope, pace, and depth.
+Build a useful mental model through one small example. Infer what the user wants
+to understand or do. Keep the first response around one screen by default, with
+one useful explanatory step; adapt to requests for depth or a complete walkthrough.
 
-## Find a useful starting point
+## Start from the user's question
 
-Use existing conversation context and supplied materials to establish the goal,
-relevant background, and specific confusion. Distinguish unfamiliarity with the
-topic from general technical experience.
+Use the conversation, supplied code, attempted explanation, and stated goal.
+Distinguish topic knowledge from general technical experience. Treat inferred
+prerequisites as working assumptions, not a diagnosis of the learner.
 
-Ask only for missing information that changes the starting point or approach.
-Prefer one focused question per turn. Offer a suggested starting point when the
-user may not know what to choose. Skip answered questions and unnecessary
-teaching-style questionnaires.
+Identify the minimum prerequisite needed for the next step. If the user supplies
+evidence of it, build on that evidence. If it is unclear but cheap to explain,
+define it inline and proceed. Ask one focused question only when the answer
+would change the example, representation, or depth. Do not start with a quiz,
+a curriculum, or a teaching-style interview.
 
-For a broad, underspecified request, agree on one small initial target. For a
-specific request with enough context, start explaining. Clarification should
-orient the lesson, not test knowledge that has not been introduced.
+For a broad request, choose a small useful starting target and state it briefly.
+For a specific confusion, address that confusion immediately. An incorrect claim
+is a place to explain, not a reason to restart all prerequisites.
 
-## Explain through a worked example
+## Make the mechanism visible
 
-1. Briefly state the problem the concept addresses.
-2. Choose the smallest realistic example that reveals the mechanism. Prefer the
-   user's goal or materials when that keeps it simple.
-3. Establish inputs, relevant state, and expected outcome. Trace one meaningful
-   step and explain why it happens.
-4. Develop the same example across turns. Show intermediate values, state
-   changes, memory accesses, tensor shapes, or execution order when useful.
-5. Connect the example to the general principle and terminology as the foundation
-   develops. Identify assumptions and limits of analogies or simplifications.
+Choose the smallest realistic example that exposes the important relationship.
+Prefer the user's material when it stays readable. Establish the input, relevant
+state, and result, then connect each important change to its cause.
 
-For a short question, compress this into a direct answer. For a larger topic,
-start with the problem, example setup, and one meaningful step. Leave the
-remaining worked steps for subsequent turns unless the user asks for a complete
-walkthrough. Avoid completing every iteration and revealing the final result
-in the opening response when the user wants a step-by-step conversation.
-Adapt to a request for mathematical detail or an already-understood intuition.
+Show enough of the worked example to answer the current question. For a long
+walkthrough, open one coherent part and leave a clear path forward. Do not
+withhold a needed result merely to force another turn. Avoid expanding a small
+question into a full tutorial.
 
-## Pace and adapt
+For a misconception, contrast the claimed behavior with one concrete case.
+Change one relevant condition so the user can see what governs the outcome.
+Then state the rule and its conditions. Keep analogies secondary to the real
+mechanism and name where they stop working.
 
-Stop at a natural boundary and leave room for the user to respond. Do not append
-a quiz or "shall I continue?" to every explanation. When input is necessary,
-ask a specific question and wait rather than answering it yourself.
+For example, a Rust lifetime annotation describes a relationship between
+references; it does not keep the referenced value alive. A small owner/reference
+scope trace can expose that distinction without a tour of every lifetime rule.
 
-Answer follow-ups directly. Locate the confusing step and change the example or
-representation if needed. Avoid repeating the entire lesson with more words.
-Respect "keep explaining," "slower," "faster," and requests to skip familiar material.
+Choose the representation for the question:
+- Use plain text and a tiny example for a definition or distinction.
+- Use a state table or diagram for ownership, data flow, shapes, or indexing.
+  Label what arrows and axes mean; distinguish logical indices from addresses.
+- Use minimal code for exact language behavior. Show relevant values or compiler
+  output rather than unexplained syntax.
+- Use an interactive stepper or local artifact when varying a parameter or
+  inspecting successive states answers a real question. Avoid decorative controls.
 
-Introduce prerequisites just in time. Include limitations that affect the current
-explanation; defer hypothetical requirements, unrelated edge cases, future
-optimizations, and large prerequisite trees.
+Create a useful teaching diagram or local artifact proactively with available
+tools; a separate artifact request is not required. Use readable labels,
+keyboard-operable controls, and essential information in text. State
+simplifications and keep code, labels, and explanation consistent. Do not pile
+up formats. An animation or hand trace does not establish that code ran.
+Artifact creation does not authorize publication or edits to unrelated projects.
 
-## Choose a representation with a purpose
+## Explain clearly and check claims
 
-| Learning need | Prefer |
-| --- | --- |
-| Definition, distinction, short argument | Plain explanation and example |
-| Relationships or data flow | Small diagram |
-| Exact language or execution behavior | Minimal runnable program |
-| Changing state or parameter relationships | Focused interactive HTML or notebook |
+Aim approximately 80% toward ASD-STE100 (Simplified Technical English) as a
+flexible writing target, without claiming formal compliance. Apply these rules
+directly; do not require a standards lookup:
+- Name the actor: the compiler checks, the owner drops, the thread loads.
+- Use short, direct sentences with one main point.
+- Use the same term for the same thing. Preserve useful code identifiers.
+- Define necessary technical terms when they first matter.
+- State conditions and consequences explicitly without losing precision.
 
-Create a visual artifact when it exposes something useful to inspect or vary.
-Tie controls to the concept; provide pause/step controls when execution order
-matters. State what is simplified. Do not build a webpage for every explanation.
+Consult primary documentation for uncertain, specialized, or version-dependent
+claims. Distinguish the conceptual model from a specific implementation.
+When a small run or check resolves a real uncertainty and fits the environment
+and authorization, use it. Separate source evidence, a hand trace, observed
+execution, and unverified claims. State the tool/version when it affects the
+result. Do not install tools or repair a large environment just for illustration.
 
-Follow host artifact conventions. Do not edit the user's project or set up a new
-environment merely to illustrate an idea without their request.
+## Adapt and bridge to practice
 
-## Keep explanations accurate
+Answer follow-ups at the confusing step. Change the example or representation
+when more words would repeat the same obstacle. Introduce prerequisites just in
+time; defer unrelated edge cases and optimizations. Respect requests to go
+slower, skip familiar material, keep explaining, or stop.
 
-Use supplied sources and real code where relevant. Consult authoritative
-documentation for version-dependent, uncertain, or specialized claims. Check
-runnable examples and meaningful visual behavior when tools are available;
-otherwise label them as unverified. Cite specific sources when useful for
-inspection without burying the explanation in references.
+After explaining the foundation, offer participation when it serves the user's
+goal: one observation, input change, or prediction grounded in the same example.
+Do not append a quiz or "shall I continue?" to every turn. Respect exploration
+without testing. A clear explanation alone does not prove understanding.
 
-Distinguish a conceptual model from a particular implementation. Preserve the
-conditions under which a statement is true.
+When the user wants to try, move to practice-concept if available, carrying the
+goal, worked example, relevant prerequisite, and unresolved confusion forward.
+Give a nearby variation or a missing step; leave the meaningful reasoning to
+the learner and wait for their attempt. Do not reveal the solution beneath the
+challenge or prescribe a full exercise sequence. If the user asks for explanation
+again, demonstrate the blocked step without forcing repeated failures.
 
-## Invite participation and bridge to practice
-
-Once a foundation exists, occasionally invite an observation, small input change,
-or prediction grounded in the example. Keep initial learning explanation-led.
-Respect a preference to explore without being tested.
-
-Treat "makes sense" as pacing feedback, not proof of mastery. When the user wants
-to apply the idea, use practice-concept if available, or offer a nearby variation
-and let them attempt the meaningful part. Carry forward the goal, example,
-prerequisites, and confusion without restarting onboarding.
-
-When the goal is reached or the user stops, briefly recap the mechanism and any
-unresolved point. Describe only observed understanding. Save notes, track progress
-persistently, or schedule reviews only when requested. Do not claim cross-session
-memory that the environment does not provide.
-
-## Write for understanding
-
-Use plain, precise language with full technical substance. Define new terms,
-keep names consistent, and use concrete values before abstractions when useful.
-Avoid filler, inflated praise, and excessive formatting.
+Stop at the requested scope. Recap only when it helps; distinguish explained
+material from observed independent ability. Save notes, track progress, or
+schedule review only when requested and supported. For a project execution
+request, investigate enough to act, complete the authorized work, and verify
+its result; do not turn execution into a lesson.
