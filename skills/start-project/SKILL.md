@@ -1,124 +1,134 @@
 ---
 name: start-project
-description: Turn a rough software or technical project idea into a clear goal, consequential constraints, and a small verifiable first milestone, then build within the requested scope. Use for starting or scoping a new project or substantial new capability. Prefer do-project-task for an already-defined change in an existing project; respect planning-only and learner-led requests.
+description: Turn a rough software or technical idea into the smallest useful verifiable milestone, then plan, co-build, or implement within the user's scope. Use when a new project or substantial capability still needs direction. Prefer do-project-task for an already-defined change in an existing project; preserve plan-only and learner-led intent.
 ---
 
 # Start a Project
 
-Help the user turn an imperfect initial prompt into a concrete, useful result.
-Clarify direction before committing to consequential choices, then make progress
-in small verifiable increments.
+Turn the idea into one useful behavior and evidence that it works. Investigate
+more than you present. Keep the opening around one screen: a concrete direction,
+the next useful step, and a question only if its answer changes the approach.
 
-## Establish intent and context
+## Find the purpose and division of work
 
-Use the conversation, supplied materials, and accessible project context first.
-Verify the destination and environment actually exist and are accessible. A local
-path or another chat's name does not grant access. State access limitations
-plainly and keep independent planning useful without claiming files were changed.
+Infer the user's purpose from the request, conversation, and supplied materials.
+Determine whose problem the project solves and one real input/action and useful
+output. Do not start with a technology questionnaire.
 
-Distinguish:
-- Exploring or planning an idea.
-- Learning by building something themselves.
-- Delegating a working first version or a larger deliverable.
+Follow the requested mode:
 
-Follow the user's stated intent. Use practice-concept for learner-led attempts
-when useful; do not silently take over their core learning work. For a clearly
-defined existing-project change, use do-project-task when available.
+- **Plan only:** give a feasible milestone and how to check it. Do not create
+  application code, manifests, or infrastructure.
+- **Co-build:** agree who writes the meaningful part. If the user wants to learn,
+  leave that part to them; provide incidental setup, one bounded step, and feedback
+  on their attempt. Use practice-concept when available for learner-led work.
+- **Delegated implementation:** inspect enough to act, then build and verify.
+  Explain decisions that matter without turning execution into a lesson.
 
-## Ask questions that change the work
+A request for help is not automatically a learning request. Ask about the division
+of work only when the distinction changes what to do next and context cannot settle
+it. Keep settled decisions when the user changes mode.
 
-Establish the problem, intended user or workflow, and a concrete example of a
-successful input/action and output. Surface missing constraints only when they
-affect the first result: existing stack, hardware, compatibility, real data,
-deployment, cost, time, or other relevant limits.
+For a defined fix, feature, or refactor in an existing project, proceed with
+do-project-task when available, or its bounded implementation workflow. Do not
+restart project discovery. An existing repository can still need start-project
+when the direction of a substantial new capability is unresolved.
 
-Inspect discoverable repository facts instead of asking the user to describe
-them. Prefer one focused question per turn. Offer a recommendation or simple
-choices when the user does not yet know how to specify the requirement.
-Ask about purpose before asking for technology preferences. Request the next
-blocking input rather than every detail that might help later.
+## Ground only the constraints that matter now
 
-Separate unknowns:
-- Ask before dependent work when plausible answers change core behavior, scope,
-  data handling, or an expensive-to-reverse decision.
-- State a reasonable assumption and proceed for routine reversible choices.
-- Defer questions about capabilities that the first milestone does not require.
+Verify access to the intended destination and environment. A path or another chat's
+name does not establish access. Read applicable repository guidance and inspect
+relevant documentation, configuration, source, and working state. Preserve user
+edits. Do not inventory a whole repository for a small starting point.
 
-A short prompt is not itself a reason to interview. Start directly when enough
-context is already available. Avoid repeating settled decisions or conducting
-a comprehensive questionnaire for a small project.
+Check facts that could alter the first result: available hardware, existing stack,
+sample data, compatibility, data handling, cost, time, or deployment requirements.
+Use tools and primary documentation for discoverable or uncertain facts.
+Distinguish observed facts, user requirements, and working assumptions.
 
-## Define the first useful result
+Ask one focused question when plausible answers change behavior, scope, or a
+costly-to-reverse choice. Recommend a concrete default when useful. Ask before
+dependent work; continue useful independent work. For routine reversible choices,
+state a reasonable assumption and proceed. Defer unknowns the first milestone
+does not need. A short prompt alone does not justify an interview.
 
-Briefly describe the goal, required behavior, relevant constraints, and how to
-recognize completion. State an important exclusion when it prevents plausible
-scope drift; do not manufacture an extensive non-goals document.
+## Choose one complete milestone
 
-Choose the smallest complete behavior that demonstrates value or tests the
-central idea. Prefer a runnable path from real input to meaningful output over
-empty scaffolding, infrastructure, or a list of interfaces.
+Describe the user's useful action, its result, and the evidence of completion.
+Use a short statement or a few steps, not a mandatory specification document.
+Choose a small path from meaningful input to observable output. Empty scaffolding
+or a set of interfaces is not a working first result.
 
-For a benchmark or ML experiment, define the workload, correctness check, relevant
-hardware, and success measure as needed. Do not promise a speedup or feasibility
-before evidence exists. For an app or tool, define the central user action and
-its observable result.
+If feasibility is the central unknown, test that assumption first. State the
+question, a bounded experiment, and what result would support continuing, changing
+direction, or stopping. A passing technical check can show feasibility; it cannot
+establish that users need the product.
 
-The first milestone is a sequencing choice, not permission to discard requested
-requirements. If the user asks for the whole deliverable, continue through the
-necessary milestones until that requested scope is complete.
+For example, a GPU benchmark comparison tool might first read two existing result
+files, match the same workloads, and show latency ratios. Use a real sample to
+choose fields. Do not silently compare different shapes, dtypes, devices, timing
+units, or measurement methods; flag missing or incompatible records. A result-file
+comparison does not require a GPU runner. If new measurements are needed, inspect
+the available device and framework, check correctness, and account for warm-up,
+asynchronous execution, and repeated measurements as the framework requires.
+Do not promise a speedup before measuring it.
 
-## Resolve consequential uncertainty
+This is an example, not a required product shape. Keep the user's chosen goal.
+Add persistence, authentication, services, abstractions, or deployment machinery
+only when present requirements need them. Defer hypothetical features while
+preserving necessary correctness, data safety, and maintainability.
 
-Research primary documentation or inspect source when it could change the
-approach. Compare a small number of plausible options only when there is a real
-tradeoff; recommend one with a concrete reason. For a simple obvious choice,
-use the existing conventions or a straightforward default.
+The first milestone orders the work; it does not shrink an authorized full
+deliverable. Continue through further milestones when the user requested them.
 
-Use a bounded experiment when a central feasibility assumption cannot be
-resolved cheaply. State the question and the evidence it will produce. Prefer
-testing a key dependency early over building a large shell around an unverified
-assumption. Keep mocks and stubs explicit; a mock does not prove integration.
+## Take the next useful step
 
-Keep architecture proportional to present requirements. Add persistence,
-authentication, distributed services, abstraction layers, or deployment machinery
-when the requested behavior needs them. Do not introduce them solely for imagined
-future users or scale. Preserve basic correctness and maintainability; calling
-something a prototype does not excuse misleading behavior or preventable data loss.
+For planning, deliver the plan at the requested depth and stop. For co-building,
+give one meaningful task and leave room for the user's attempt at the agreed
+boundary. Bundle trivial setup with that task instead of requiring a separate
+confirmation for each setup action.
+For delegated work, carry the goal, constraints, decisions, and checks into
+implementation without a fresh interview or routine approval gate. Use
+do-project-task when available; otherwise implement and verify directly.
 
-## Move from direction to implementation
+Use existing conventions and limit dependencies and files to the current result.
+Research or compare alternatives only when a real tradeoff could change the
+approach. Prefer a small feasibility test over a large shell around an unverified
+dependency. Label mocks; they do not prove integration.
 
-Keep the plan short enough to review. For a small project, a few sentences or
-steps suffice; use a persistent plan only when the work or repository convention
-justifies one. Do not create a mandatory stack of specifications or planning files.
+Honor requested checkpoints and the host's permission rules. Act within existing
+authorization. Local project creation does not itself authorize provisioning,
+publication, deployment, or changes to unrelated projects. Do not request duplicate
+approval for an action the user has already authorized.
 
-For planning-only requests, deliver the requested plan and stop without creating
-application code, manifests, or infrastructure. When building is requested or
-clearly implied and material questions are settled, implement within that
-authorization. Do not ask for fresh approval at every routine step.
+## Verify the result and close the loop
 
-Follow explicit requests for guided checkpoints or discussion before coding.
-Prepare concrete evidence or a reviewable proposal before requesting a decision
-that is genuinely needed. Respect the host's permission rules and the user's
-existing authorization; do not invent additional blanket approval gates.
+Exercise the core behavior with a meaningful example and the project's required
+checks. Use the relevant surface: a CLI invocation, numerical comparison, real
+integration, or running UI. Check a failure case when it could otherwise make the
+result misleading, such as incompatible benchmark records. Fix failures caused by
+the work; broaden checks when evidence or shared behavior warrants it.
 
-Use do-project-task for execution when available, carrying the goal, decisions,
-constraints, and checks forward without restarting clarification. Use existing
-project conventions and preserve user edits. Keep dependencies and new files
-limited to what the current deliverable needs.
+Separate source inspection, passing tests, mock demonstrations, actual execution,
+and deployment. State unrun checks and limitations. If blocked, finish independent
+useful work and identify the smallest missing input, access, or decision. Do not
+replace unavailable execution with invented results.
 
-## Verify and report
+Report what works, the evidence, and a material limitation concisely. Stop at the
+requested scope. Offer one next milestone only when useful.
 
-Exercise the core behavior with an appropriate example or test. Validate UI
-behavior in a running UI when available; validate commands, files, or numerical
-results directly for other projects. Run required checks and fix failures caused
-by the work. Scale verification to the change and avoid repetitive checks without
-new evidence.
+## Explain decisions clearly
 
-Report what works, how it was verified, and material limitations. Distinguish
-planning, scaffolding, mock demonstrations, local execution, real integrations,
-and deployment. If blocked, finish useful independent work and identify the
-smallest missing input, access, or decision without claiming completion.
+For explanatory output, aim approximately 80% toward ASD-STE100 (Simplified
+Technical English) as a flexible target, without claiming formal compliance.
+Name the actor that performs each action. Use short, direct sentences with one
+main point. Keep terms consistent. Define necessary unfamiliar technical terms
+when they matter. State conditions and consequences without losing precision.
+Apply these rules directly; no standard lookup is needed.
 
-Stop at the user's requested scope. Offer one relevant next milestone when useful.
-Do not provision services, publish, or deploy as an automatic consequence of
-creating a local project; follow the user's actual requested scope and permissions.
+Create a diagram or local teaching artifact proactively when it answers a real
+question, such as exposing a data boundary or comparing choices. Use available
+tools and skills. Keep labels readable, interactive controls keyboard-operable,
+and essential information in text. Label simplifications and illustrative data.
+An artifact is not evidence that the proposed system ran. Do not make a visual
+compulsory or let it replace the user's requested implementation.
