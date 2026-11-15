@@ -11,10 +11,9 @@ turns around one screen by default; investigate more deeply than you present.
 
 ## Choose the boundary
 
-Use existing context and a little repository inspection to identify the purpose.
-Ask one focused purpose question only if its answer would change the route:
-"using PyTorch or understanding its internals?" can matter; a clear autograd
-repo-tour request needs no intake interview.
+Infer the user's purpose from the request and available context. Ask one focused
+question only when different answers would lead to meaningfully different code
+paths. Begin the tour when the purpose is already clear.
 
 Match coverage and depth to the goal:
 
