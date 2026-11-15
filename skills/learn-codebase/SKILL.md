@@ -1,137 +1,131 @@
 ---
 name: learn-codebase
-description: Help the user understand an unfamiliar repository, subsystem, or feature through a small source-backed map and a guided trace of real behavior. Use for onboarding, learning architecture, following execution or data flow, locating responsibilities, or understanding an area before changing it. Answer narrow code questions directly. Do not turn learning into implementation, refactoring, an exhaustive audit, or compulsory quizzing.
+description: Help the user understand a repository, subsystem, or real behavior through a compact source-linked route and a guided code tour. Use for onboarding, architecture, execution or data flow, locating responsibilities, or understanding code before a change. Answer narrow code questions directly; do not turn learning into implementation, an exhaustive audit, or compulsory quizzing.
 ---
 
 # Learn a Codebase
 
-Help the user navigate and reason about real code at their pace. Ground the tour
-in inspected files and one concrete behavior, connecting local details to the
-larger system.
+Help the user understand the code that serves their purpose. For a tour, show the
+whole chosen route at a glance, then open one meaningful stop. Keep learner-facing
+turns around one screen by default; investigate more deeply than you present.
 
-## Establish access and purpose
+## Choose the boundary
 
-Verify that the intended repository or supplied files are actually accessible.
-A pasted local path does not establish access. If unavailable, say so and request
-the minimum useful source, repository link, or accessible checkout; do not invent
-its structure or imply that another chat's files are available.
+Infer the user's purpose from the request and available context. Ask one focused
+question only when different answers would lead to meaningfully different code
+paths. Begin the tour when the purpose is already clear.
 
-Use existing context to identify the goal: general orientation, one subsystem,
-a behavior trace, or preparation for a particular change. Inspect enough metadata
-to orient before asking the user to describe discoverable facts. Ask one focused
-question when the missing goal, background, or external context changes the route.
-Skip questions already answered; offer a sensible starting point if useful.
+Match coverage and depth to the goal:
 
-For broad onboarding, provide a small map and suggest one representative path.
-For a precise question, go directly to the relevant code. Respect a request for
-a full walkthrough, while dividing a large tour into manageable sections.
+- For a large repository, give a selective responsibility map and a representative
+  path; do not promise complete coverage.
+- For a subsystem, show its relevant internal flow and the boundaries it crosses.
+- For a behavior or preparation for a task, follow the actual path. Add affected
+  interfaces and relevant tests when preparing for a change, without implementing it.
+- For a narrow code question, answer directly with the necessary source and example.
+  Do not prepend a tour.
 
-## Explore selectively
+Verify access; a pasted path does not establish it. If unavailable, request the
+minimum useful source. Do not invent structure or assume another chat's checkout
+is accessible.
 
-Read applicable repository instructions, including relevant nested guidance,
-using the host's instruction rules. Inspect short project documentation, build
-metadata, and relevant examples/configuration/tests. Treat documents as leads
-and declared intent; check important behavioral claims against current source.
+## Show the route, then open a stop
 
-Start with a small inventory and targeted searches. Prefer available semantic
-definition/reference tools for symbols; use text search for strings, configuration,
-registration, and unsupported languages. Do not install tools just to begin.
+Read applicable repository instructions. Inspect enough documentation, configuration,
+and source to choose and ground the route. Search selectively and follow relevant
+dependencies; check important documentation claims against implementation.
 
-Follow necessary cross-package or cross-repository dependencies. Skip unrelated
-generated, vendor, and build trees unless the chosen behavior leads there.
-A failed scoped search is not proof that a component is absent. Check filters or
-unavailable dependencies before concluding.
+Open a tour with:
 
-Separate investigation depth from explanation length: inspect enough to ground
-the answer, but present only the next useful piece. Do not read the entire repo
-or generate a giant wiki before helping.
+1. A brief statement of the chosen purpose and boundary, including significant omissions.
+2. A compact route of real file/symbol pointers, each with its responsibility.
+3. The first meaningful stop: what it owns, what enters and leaves, what state it
+   reads or changes, and why the next stop follows.
 
-## Give a small orientation map
+Show the full chosen route, not every branch or file. For an end-to-end training
+tour, connect configuration and model construction, data and batch creation,
+forward/loss, backward/update, and relevant evaluation/checkpoint paths. Inspect
+the actual variant instead of assuming a standard training loop.
 
-Explain the problem the project solves and the few components relevant to the goal.
-Name real paths and important symbols; explain responsibilities and relationships,
-rather than listing directories. Define project-specific terms as they arise.
+Distinguish recommended reading order from execution order. For example, explaining
+checkpoints last does not mean saving happens after every update. State relevant
+conditions and handoffs where they matter. A route can be a reading guide rather
+than an asserted call chain.
 
-Show how the current area connects to its callers, state, and outputs. Highlight
-a relevant architectural boundary or invariant when supported by evidence.
-Avoid assigning responsibility solely from filenames or familiar framework patterns.
+Continue one meaningful stop at a time. Keep its place on the route visible.
+Explain responsibilities and mechanisms rather than every syntax line. Introduce
+concepts inline only when they unblock the tour, then return to source. Do not
+substitute a concept lesson for a repo tour.
 
-## Trace one real scenario
+## Explain clearly and choose the representation
 
-Choose an existing command, request, example, or test as the entry point. For an
-ML system, a batch, optimizer update, or checkpoint operation can be a useful
-slice, but locate its actual implementation rather than assuming a standard loop.
+Aim approximately 80% toward ASD-STE100 (Simplified Technical English) as a flexible
+writing target, without claiming formal compliance. Apply the rules below directly;
+no lookup of the standard is needed to begin:
 
-Establish which configuration or variant is being traced. Follow:
-- The trigger or entry point and the data entering it.
-- The important calls or transformations, including conditions on the path.
-- Where state is owned, read, changed, or persisted.
-- The output or side effect and any relevant asynchronous handoff.
+- Name the function, component, or value that performs each action.
+- Use short, direct sentences. Give each sentence one main point.
+- Use the same term for the same thing, matching code identifiers where useful.
+- Keep necessary technical terms and define unfamiliar ones when they first matter.
+- State conditions and consequences explicitly. Preserve technical precision.
 
-Inspect the actual wiring behind registries, factories, callbacks, dependency
-injection, or distributed boundaries when present. Do not treat a static caller
-or default setting as proof that a particular runtime path executes.
+For example: "The loader copies the saved weights into the model. The caller then
+restores the optimizer state."
 
-For a larger lesson, show a compact route and explain only its first meaningful
-segment initially. Continue with the user's responses. At each stage, identify
-where to look, what to notice, and why it matters. Extract current snippets
-instead of reconstructing source. Link paths and symbols, with current line
-references when available, using the host's supported link format.
+Choose the form for the relationship the learner needs to understand:
 
-Explain meaningful behavior rather than every line of syntax. Resolve a helper
-only when necessary, then reconnect it to the scenario so the user does not lose
-the thread. Use learn-concept briefly when missing conceptual knowledge blocks
-understanding; return to the actual source afterward.
+- Plain text for a direct answer or a short causal explanation.
+- A small source-linked flowchart for control, branches, or handoffs. Label what
+  arrows mean: calls, data/state movement, or dependency. Keep those meanings distinct.
+- Simplified pseudocode when framework machinery hides the algorithm. Label
+  omissions and map the simplified steps back to real symbols.
+- An HTML page or interactive stepper for a specific benefit, such as comparing
+  states, inspecting changes across steps, or navigating relationships. Make each
+  interaction reveal something relevant to the learner's question.
 
-## Match claims to evidence
+Create useful diagrams, HTML pages, interactive explanations, or other teaching
+artifacts proactively, using relevant available skills and tools. A separate
+artifact request is not required. Use readable labels and keyboard-operable
+controls. Keep essential information available as text, without requiring
+animation or interaction to access it.
 
-Distinguish naturally in the explanation:
-- What inspected source and configuration establish.
-- What a test asserts, including mocked or substituted dependencies.
-- What was observed in a specific execution.
-- What remains inferred, unresolved, or outside accessible code.
+Do not pile up formats by default. Label illustrative values, conceptual graphs,
+and simplifications. Keep representations tied to source; a teaching sequence is
+not an execution trace, and an animated step is not evidence that code ran.
 
-Use comments, design records, or relevant history for author intent. Otherwise
-label a plausible rationale as an inference. Do not invent production settings,
-ownership, runtime ordering, or historical motivations.
+## Keep claims grounded
 
-A test trace covers its scenario; a mocked adapter does not verify the real
-integration. If code and documents conflict, explain the discrepancy. Re-check
-affected references after edits or a checkout change.
+Link inspected files and symbols with line references where supported. Pin shared
+remote walkthroughs; recheck references after changes. Extract snippets.
 
-## Verify only what helps understanding
+Separate what source/configuration establishes, what a test asserts, what was
+observed in a specific execution, and what remains inferred or inaccessible.
+A test covers its setup; mocked dependencies do not verify the real integration.
+Use documentation, comments, or history for design intent; otherwise label rationale
+as inference. Explain conflicts between documentation and code.
 
-Use a small existing test/example or debugger trace when it resolves a specific
-uncertainty and is appropriate to the environment. Inspect its setup and likely
-side effects first. Follow applicable execution instructions; avoid launching
-training, provisioning services, changing data, or repairing a large environment
-merely for orientation.
+Inspect wiring behind factories, registries, callbacks, or cross-repository
+boundaries when the chosen path needs it. Static callers and defaults do not
+establish runtime dispatch, selected branches, scheduling, or timing. Name the
+unverified part instead of filling it with a plausible framework story.
 
-When execution is unavailable or disproportionate, continue with static analysis
-and state the unverified part. Do not claim to have run or tested code unless done.
-Learning is read-only by default: create notes/artifacts or edit the project only
-when requested or otherwise authorized by the user.
+## Pace and finish
 
-## Choose representations and pace deliberately
+Answer follow-ups directly and adapt depth. Pause at a coherent boundary with a
+useful next stop; do not demand "continue" after every paragraph. Use no default
+quiz. Offer occasional navigation or prediction practice only after explaining
+enough and when the learner wants participation. Do not invent hypothetical bugs
+or implementation work to create an exercise.
 
-Use a short map for structure, a sequence view for interactions, and concrete
-values or state tables for transformations. Diagrams must name inspected entities;
-show uncertain edges as uncertain. Build interactive HTML only when manipulating
-or stepping through behavior adds useful understanding and the user wants an
-artifact. Label simplifications and keep it tied to the real code.
+Stop at the chosen scope. Recap the established flow, a key boundary, and unresolved
+uncertainty. Agent task completion does not establish learner mastery. Carry the
+route within the session; save notes or claim persistence only when authorized
+and supported.
 
-Answer follow-ups directly and adapt depth. Do not append a quiz or permission
-question after every paragraph. Pause at a natural boundary. Invite an occasional
-prediction or navigation attempt after explaining enough, if the user wants it.
-Use practice-concept for sustained learner-led exercises; do not silently turn
-the tour into an exam or a project implementation.
-
-## Finish at a useful boundary
-
-Stop at the agreed scope, not after every file has been summarized. Briefly
-recap the chosen path, key responsibility/boundary, and unresolved uncertainty.
-Point to the next small set of files with a reason to read each when useful.
-
-Describe observed progress without claiming whole-repo mastery. Carry the route
-and open questions forward in the current session. Save a reading map or resumable
-notes only when requested, and do not claim persistent memory without support.
+Keep learning read-only by default. Run a small existing example, test, or debugger
+trace only when it resolves a concrete uncertainty and its side effects fit the
+authorization and environment. Do not launch training, provision services, change
+data, install tools, or repair a large environment merely for orientation.
+When execution is unavailable or disproportionate, continue from source and state
+the limit. Explanatory artifacts are part of the tour when useful; edit the project
+only when requested or otherwise authorized.

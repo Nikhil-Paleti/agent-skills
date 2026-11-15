@@ -7,7 +7,7 @@ and refine specific behavior when it helps or gets in the way.
 | --- | --- | --- |
 | [learn-concept](skills/learn-concept/SKILL.md) | Understanding an unfamiliar technical idea | One concrete example, clear mechanics, manageable conversational steps |
 | [practice-concept](skills/practice-concept/SKILL.md) | Developing independent ability | One small challenge, learner attempt, targeted feedback, gradually less help |
-| [learn-codebase](skills/learn-codebase/SKILL.md) | Navigating and understanding a repository or feature | A small source-backed map, then a guided trace of real behavior |
+| [learn-codebase](skills/learn-codebase/SKILL.md) | Navigating and understanding a repository or feature | A compact source-linked route, then one meaningful stop at a time |
 | [start-project](skills/start-project/SKILL.md) | Turning a rough project idea into a useful first result | Material clarification, a small verifiable milestone, then action within scope |
 | [do-project-task](skills/do-project-task/SKILL.md) | Completing a bounded change in an existing project | Relevant inspection, coherent implementation, appropriate verification |
 
