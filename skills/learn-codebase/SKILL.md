@@ -60,11 +60,16 @@ substitute a concept lesson for a repo tour.
 
 ## Explain clearly and choose the representation
 
-Use Karpathy's approximately 80%-toward-ASD-STE100 recommendation as a flexible
-plain-technical-English target: name actors, use direct short sentences, keep
-terms consistent, and preserve and define necessary technical terms. Do not
-claim formal STE compliance or apply mechanical word bans. Make this visible
-in the explanation, not merely in a bibliography.
+Write clear technical English:
+
+- Name the function, component, or value that performs each action.
+- Use short, direct sentences. Give each sentence one main point.
+- Use the same term for the same thing, matching code identifiers where useful.
+- Keep necessary technical terms and define unfamiliar ones when they first matter.
+- State conditions and consequences explicitly. Preserve technical precision.
+
+For example: "The loader copies the saved weights into the model. The caller then
+restores the optimizer state."
 
 Choose the form for the relationship the learner needs to understand:
 
