@@ -79,12 +79,15 @@ Choose the form for the relationship the learner needs to understand:
   arrows mean: calls, data/state movement, or dependency. Keep those meanings distinct.
 - Simplified pseudocode when framework machinery hides the algorithm. Label
   omissions and map the simplified steps back to real symbols.
-- An HTML page or interactive stepper when exploring architecture, inspecting
-  changing state, or comparing steps improves understanding.
+- An HTML page or interactive stepper for a specific benefit, such as comparing
+  states, inspecting changes across steps, or navigating relationships. Make each
+  interaction reveal something relevant to the learner's question.
 
 Create useful diagrams, HTML pages, interactive explanations, or other teaching
-artifacts proactively, using relevant available skills and tools. Choose what helps
-the current tour; a separate artifact request is not required.
+artifacts proactively, using relevant available skills and tools. A separate
+artifact request is not required. Use readable labels and keyboard-operable
+controls. Keep essential information available as text, without requiring
+animation or interaction to access it.
 
 Do not pile up formats by default. Label illustrative values, conceptual graphs,
 and simplifications. Keep representations tied to source; a teaching sequence is
