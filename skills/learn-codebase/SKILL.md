@@ -59,7 +59,9 @@ substitute a concept lesson for a repo tour.
 
 ## Explain clearly and choose the representation
 
-Write clear technical English:
+Aim approximately 80% toward ASD-STE100 (Simplified Technical English) as a flexible
+writing target, without claiming formal compliance. Apply the rules below directly;
+no lookup of the standard is needed to begin:
 
 - Name the function, component, or value that performs each action.
 - Use short, direct sentences. Give each sentence one main point.
@@ -77,9 +79,12 @@ Choose the form for the relationship the learner needs to understand:
   arrows mean: calls, data/state movement, or dependency. Keep those meanings distinct.
 - Simplified pseudocode when framework machinery hides the algorithm. Label
   omissions and map the simplified steps back to real symbols.
-- An interactive stepper when inspecting changing state or comparing steps earns
-  its cost, such as tracking a batch or accumulated gradients. Build an artifact
-  only when requested or otherwise authorized.
+- An HTML page or interactive stepper when exploring architecture, inspecting
+  changing state, or comparing steps improves understanding.
+
+Create useful diagrams, HTML pages, interactive explanations, or other teaching
+artifacts proactively, using relevant available skills and tools. Choose what helps
+the current tour; a separate artifact request is not required.
 
 Do not pile up formats by default. Label illustrative values, conceptual graphs,
 and simplifications. Keep representations tied to source; a teaching sequence is
@@ -119,5 +124,5 @@ trace only when it resolves a concrete uncertainty and its side effects fit the
 authorization and environment. Do not launch training, provision services, change
 data, install tools, or repair a large environment merely for orientation.
 When execution is unavailable or disproportionate, continue from source and state
-the limit. Create artifacts or edit the project only when requested or otherwise
-authorized.
+the limit. Explanatory artifacts are part of the tour when useful; edit the project
+only when requested or otherwise authorized.
